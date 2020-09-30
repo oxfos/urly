@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class Shortcode(models.Model):
+    """Class representing a shortcode model."""
+    shortcode = models.CharField(max_length=6, blank=True)
+    url = models.URLField()
+    created = models.DateTimeField(auto_now_add=True)
