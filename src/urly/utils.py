@@ -35,3 +35,9 @@ def url_exists(url):
     else:
         return False if response.status_code != 200 else True
 
+
+def is_invalid(shortcode):
+    """Function to test whether provided shortcode is valid."""
+    alphanum = string.ascii_lowercase + string.digits + '_'
+    return 0 in [c in alphanum for c in shortcode]
+

@@ -3,7 +3,8 @@
 {% block title %}The provided shortcode is invalid{% endblock %}
 
 {% block content %}
-<p>The provided shortcode is invalid</p>
+<p>The provided shortcode is invalid<br>
+Use only alphanumeric characters and underscores (abcdefghijklmnopqrstuvwxyz0123456789_).</p>
 
 <a href="{% url 'urly:homepage' %}">Try again</a>
 
