@@ -6,29 +6,26 @@
 
 <h1>Urly</h1>
 <section class="section">
-<h2>SHORTEN URL</h2>
-<form action="{% url 'urly:shorten' %}" method="POST">
-    {% csrf_token %}
-    <p>
-        <label for="id_url">Url:</label>
-        <input type="text" name="url" required id="id_url">
-        
-        {{ form.url.errors }}
-        
-    </p>
-    <p>
-        <label for="id_shortcode">Shortcode (optional):</label>
-        <input type="text" name="shortcode" maxlength="6" id="id_shortcode">
-        {{ form.shortcode.errors }}
-    </p>
-    <input type="submit" value="submit">
-    <a href="{% url 'urly:homepage' %}">reset</a>
-</form>
+    <h2>SHORTEN URL</h2>
+    <form action="{% url 'urly:shorten' %}" method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="id_url">Url:</label>
+            <input type="text" name="url" required id="id_url">
+
+            {{ form.url.errors }}
+
+        </p>
+        <p>
+            <label for="id_shortcode">Shortcode (optional):</label>
+            <input type="text" name="shortcode" maxlength="6" id="id_shortcode">
+            {{ form.shortcode.errors }}
+        </p>
+        <input type="submit" value="submit">
+        <a href="{% url 'urly:homepage' %}">reset</a>
+    </form>
 </section>
 <section class="section">
-<h2>CHECK SHORTCODE</h2>
-</section>
-<section class="section">
-<h2>SHORTCODE STATS</h2>
+    <h2>SHORTCODE STATS</h2>
 </section>
 {% endblock %}
