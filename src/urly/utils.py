@@ -21,9 +21,9 @@ def get_unique_shortcode(l):
     return shortcode
 
 
-def is_unique(shortcode):
+def is_not_unique(shortcode):
     """Test if shortcode is unique."""
-    return not Shortcode.objects.filter(shortcode=shortcode).exists()
+    return Shortcode.objects.filter(shortcode=shortcode).exists()
 
 
 def url_exists(url):

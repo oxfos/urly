@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
 from .forms import ShortcodeForm
-from .utils import get_unique_shortcode, url_exists
+from .utils import get_unique_shortcode, url_exists, is_not_unique
 from .models import Shortcode
 
 
@@ -23,6 +23,8 @@ def shorten(request):
             entry = form.save(commit=False)
             if url_exists(cd['url']) != True:
                 return redirect('urly:error_400')
+            if is_not_unique(cd['shortcode']):
+                return redirect('urly:error_409')
             if cd['shortcode'] == '':
                 entry.shortcode = get_unique_shortcode(6)
             entry.save()
