@@ -1,3 +1,4 @@
+import requests
 import string, random
 from .models import Shortcode
 
@@ -23,3 +24,14 @@ def get_unique_shortcode(l):
 def is_unique(shortcode):
     """Test if shortcode is unique."""
     return not Shortcode.objects.filter(shortcode=shortcode).exists()
+
+
+def url_exists(url):
+    """Function to test whether url exists."""
+    try:
+        response = requests.get(url)
+    except:
+        return False
+    else:
+        return False if response.status_code != 200 else True
+
