@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Shortcode
 
-# Register your models here.
+
+@admin.register(Shortcode)
+class ShortcodeAdmin(admin.ModelAdmin):
+    readonly_fields = ('created',)
+    list_display = ('url', 'scode', 'created')
+    fields = ('url', 'scode', 'created')
