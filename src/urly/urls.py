@@ -7,4 +7,5 @@ app_name = 'urly'
 urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('shorten/', views.shorten, name='shorten'),
+    path('400/', views.error_400, name='error_400'),
 ]

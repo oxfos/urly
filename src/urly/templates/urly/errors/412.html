@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}The provided shortcode is invalid{% endblock %}
+
+{% block content %}
+<p>The provided shortcode is invalid</p>
+
+<a href="{% url 'urly:homepage' %}">return home</a>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Url not present{% endblock %}
+
+{% block content %}
+<p>Url not present</p>
+
+<a href="{% url 'urly:homepage' %}">return home</a>
+
+{% endblock %}
