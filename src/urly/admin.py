@@ -5,5 +5,5 @@ from .models import Shortcode
 @admin.register(Shortcode)
 class ShortcodeAdmin(admin.ModelAdmin):
     readonly_fields = ('created',)
-    list_display = ('url', 'scode', 'created')
-    fields = ('url', 'scode', 'created')
+    list_display = ('url', 'shortcode', 'created')
+    fields = ('url', 'shortcode', 'created')
