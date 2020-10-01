@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ShortcodeForm
+from .utils import get_unique_shortcode
+from .models import Shortcode
 
 
 def homepage(request):
@@ -14,7 +16,7 @@ def shorten(request):
         form = ShortcodeForm(data=request.POST)
         if form.is_valid():
             entry = form.save(commit=False)
-            if entry.shortcode == '':
-                entry.shortcode = 'plchol'
+            if form.cleaned_data['shortcode'] == '':
+                entry.shortcode = get_unique_shortcode(6)
             entry.save()
     return redirect('urly:homepage')
