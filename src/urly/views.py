@@ -14,7 +14,7 @@ def homepage(request):
     return render(request, 'urly/index.html', {'form':form})
 
 
-def shorten(request):
+def get_shortcode(request):
     """View to shorten url."""
     if request.method == 'POST':
         form = ShortcodeForm(data=request.POST)
@@ -31,6 +31,17 @@ def shorten(request):
                 entry.shortcode = get_unique_shortcode(6)
             entry.save()
     return render(request, 'urly/index.html', {'form':form})
+
+
+def check_shortcode(request, shortcode_2):
+    """View to check whether shortcode in db."""
+    try:
+        shortcode = Shortcode.objects.get(shortcode=shortcode_2)
+    except:
+        return redirect('urly:error_404')
+    else:
+        return redirect(shortcode.url)
+        
 
 
 # ERROR VIEWS

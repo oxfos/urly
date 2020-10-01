@@ -11,4 +11,5 @@ urlpatterns = [
     path('404/', views.error_404, name='error_404'),
     path('409/', views.error_409, name='error_409'),
     path('412/', views.error_412, name='error_412'),
+    path('<str:shortcode_2>/', views.check_shortcode, name='check_shortcode'),
 ]
