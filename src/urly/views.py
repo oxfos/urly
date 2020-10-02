@@ -50,7 +50,7 @@ def check_shortcode(request, shortcode_2):
     try:
         shortcode = Shortcode.objects.get(shortcode=shortcode_2)
     except:
-        response = HttpResponse('Shortcode not found')
+        response = HttpResponse('Shortcode not found<br><a href="/">Try again</a>.')
         response.status_code = 404
         response.reason_phrase = 'Shortcode not found'
         return response
@@ -62,3 +62,17 @@ def check_shortcode(request, shortcode_2):
         shortcode.save()
         return response
         
+
+def get_stats(request, shortcode):
+    """View to get shortcode statistics."""
+    try:
+        shortcode = Shortcode.objects.get(shortcode=shortcode)
+    except:
+        response = HttpResponse('Shortcode not found<br><a href="/">Try again</a>.')
+        response.status_code = 404
+        response.reason_phrase = 'Shortcode not found'
+        return response
+    else:
+        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": 6}' % (shortcode.created, shortcode.lastRedirect))
+        response.status_code = 200
+        return response
