@@ -7,6 +7,7 @@ class Shortcode(models.Model):
     url = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
     lastRedirect = models.DateTimeField(null=True)
+    redirectCount = models.IntegerField(null=True)
 
     def __str__(self):
         return self.shortcode
