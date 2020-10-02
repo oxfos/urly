@@ -6,6 +6,7 @@ class Shortcode(models.Model):
     shortcode = models.CharField(max_length=6, blank=True)
     url = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
+    lastRedirect = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.shortcode

@@ -1,5 +1,6 @@
 
 import requests
+from datetime import datetime
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
@@ -57,5 +58,7 @@ def check_shortcode(request, shortcode_2):
         response = HttpResponseRedirect(shortcode.url)
         response.status_code = 302
         response['Location'] = shortcode.url
+        shortcode.lastRedirect = datetime.today()
+        shortcode.save()
         return response
         
