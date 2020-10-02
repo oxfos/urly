@@ -59,6 +59,7 @@ def check_shortcode(request, shortcode_2):
         response.status_code = 302
         response['Location'] = shortcode.url
         shortcode.lastRedirect = datetime.today()
+        shortcode.redirectCount = shortcode.redirectCount + 1
         shortcode.save()
         return response
         
@@ -73,6 +74,6 @@ def get_stats(request, shortcode):
         response.reason_phrase = 'Shortcode not found'
         return response
     else:
-        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": 6}' % (shortcode.created, shortcode.lastRedirect))
+        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": %s}' % (shortcode.created, shortcode.lastRedirect, shortcode.redirectCount))
         response.status_code = 200
         return response

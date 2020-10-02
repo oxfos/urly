@@ -4,6 +4,6 @@ from .models import Shortcode
 
 @admin.register(Shortcode)
 class ShortcodeAdmin(admin.ModelAdmin):
-    readonly_fields = ('created', 'lastRedirect')
-    list_display = ('url', 'shortcode', 'created', 'lastRedirect')
-    fields = ('url', 'shortcode', 'created', 'lastRedirect')
+    readonly_fields = ('created', 'lastRedirect', 'redirectCount')
+    list_display = ('url', 'shortcode', 'created', 'lastRedirect', 'redirectCount')
+    fields = ('url', 'shortcode', 'created', 'lastRedirect', 'redirectCount')
