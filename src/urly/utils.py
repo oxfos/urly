@@ -3,24 +3,21 @@ import string, random
 from .models import Shortcode
 
 
+
+alphanum = string.ascii_lowercase + string.digits + '_'
+
+
 def make_shortcode(l):
     """Function to create random shortcode of length l."""
-    alphanum = string.ascii_lowercase + string.digits + '_'
     return ''.join(random.sample(alphanum,l))
 
 
-def make_unique_shortcode(l):
+def make_unique_shortcode(l, set):
     """Function to create unique get_shortcode."""
-    shortcodes = Shortcode.objects.all()
     shortcode = make_shortcode(l)
-    while shortcode in shortcodes:
+    while shortcode in set:
         shortcode = make_shortcode(l)
     return shortcode
-
-
-def is_not_unique(shortcode):
-    """Test if shortcode is unique."""
-    return Shortcode.objects.filter(shortcode=shortcode).exists()
 
 
 def url_exists(url):
@@ -35,6 +32,5 @@ def url_exists(url):
 
 def is_invalid(shortcode):
     """Function to test whether provided shortcode is valid."""
-    alphanum = string.ascii_lowercase + string.digits + '_'
     return 0 in [c in alphanum for c in shortcode]
 
