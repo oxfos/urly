@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
 from .forms import ShortcodeForm
-from .utils import make_unique_shortcode, url_exists, is_not_unique, is_invalid
+from .utils import make_unique_shortcode, url_exists, is_invalid
 from .models import Shortcode
 
 
@@ -19,26 +19,28 @@ def get_shortcode(request):
     form = ShortcodeForm(data=request.POST)
     if form.is_valid():
         cd = form.cleaned_data
+        shortcode = cd['shortcode']
         entry = form.save(commit=False)
         if url_exists(cd['url']) != True:
             response = HttpResponse('Url not present.<br><a href="/">Try again</a>.')
             response.status_code = 400
             response.reason_phrase = 'Url not present'
             return response
-        elif is_not_unique(cd['shortcode']):
-            response = HttpResponse('Shortcode already in use.<br>\
-                <a href="/">Try again</a>.')
-            response.status_code = 409
-            response.reason_phrase = 'Shortcode already in use'
-            return response
-        elif is_invalid(cd['shortcode']):
+        elif is_invalid(shortcode):
             response = HttpResponse('The provided shortcode is invalid.<br>\
                     <a href="/">Try again</a>.')
             response.status_code = 412
             response.reason_phrase = 'The provided shortcode is invalid'
             return response
-        elif cd['shortcode'] == '':
-            entry.shortcode = make_unique_shortcode(6)
+        shortcodes = [getattr(c, 'shortcode') for c in Shortcode.objects.all()]
+        if shortcode in shortcodes:
+            response = HttpResponse('Shortcode already in use.<br>\
+                <a href="/">Try again</a>.')
+            response.status_code = 409
+            response.reason_phrase = 'Shortcode already in use'
+            return response
+        elif shortcode == '':
+            entry.shortcode = make_unique_shortcode(6, shortcodes)
         entry.redirectCount = 0
         entry.save()
         response = HttpResponse('{"shortcode":"%s"}' % (entry.shortcode))
