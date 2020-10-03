@@ -49,10 +49,10 @@ def get_shortcode(request):
     return render(request, 'urly/index.html', {'form':form})
 
 
-def check_shortcode(request, shortcode_2):
+def check_shortcode(request, shortcode):
     """View to check whether shortcode is already in db."""
     try:
-        shortcode = Shortcode.objects.get(shortcode=shortcode_2)
+        shortcode = Shortcode.objects.get(shortcode=shortcode)
     except:
         response = HttpResponse('Shortcode not found.<br><a href="/">Try again</a>.')
         response.status_code = 404
