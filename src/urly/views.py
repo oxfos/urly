@@ -38,6 +38,7 @@ def get_shortcode(request):
             return response
         elif cd['shortcode'] == '':
             entry.shortcode = get_unique_shortcode(6)
+        entry.redirectCount = 0
         entry.save()
         response = HttpResponse('{"shortcode":"%s"}' % (entry.shortcode))
         response.status_code = 201
@@ -46,7 +47,7 @@ def get_shortcode(request):
 
 
 def check_shortcode(request, shortcode_2):
-    """View to check whether shortcode in db."""
+    """View to check whether shortcode is already in db."""
     try:
         shortcode = Shortcode.objects.get(shortcode=shortcode_2)
     except:
