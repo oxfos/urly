@@ -32,5 +32,5 @@ def url_exists(url):
 
 def is_invalid(shortcode):
     """Function to test whether provided shortcode is valid."""
-    return 0 in [c in alphanum for c in shortcode]
+    return (len(shortcode) != 6 or 0 in [c in alphanum for c in shortcode])
 
