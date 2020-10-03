@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
 from .forms import ShortcodeForm
-from .utils import make_unique_shortcode, url_exists, is_invalid
+from .utils import make_unique_shortcode, url_exists, is_valid
 from .models import Shortcode
 
 
@@ -26,7 +26,7 @@ def get_shortcode(request):
             response.status_code = 400
             response.reason_phrase = 'Url not present'
             return response
-        elif is_invalid(shortcode):
+        elif not is_valid(shortcode):
             response = HttpResponse('The provided shortcode is invalid.<br>\
                     <a href="/">Try again</a>.')
             response.status_code = 412

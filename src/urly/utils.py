@@ -30,7 +30,7 @@ def url_exists(url):
         return False if response.status_code != 200 else True
 
 
-def is_invalid(shortcode):
+def is_valid(shortcode):
     """Function to test whether provided shortcode is valid."""
-    return (len(shortcode) != 6 or 0 in [c in alphanum for c in shortcode])
+    return (shortcode == '' or (len(shortcode) == 6 and 0 not in [c in alphanum for c in shortcode]))
 
