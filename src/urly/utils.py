@@ -3,7 +3,7 @@ import string, random
 from .models import Shortcode
 
 
-def get_shortcode(l):
+def make_shortcode(l):
     """Function to create random shortcode of length l."""
     alphanum = string.ascii_lowercase + string.digits + '_'
     code = ''
@@ -12,12 +12,12 @@ def get_shortcode(l):
     return code
 
 
-def get_unique_shortcode(l):
+def make_unique_shortcode(l):
     """Function to create unique get_shortcode."""
     shortcodes = Shortcode.objects.all()
-    shortcode = get_shortcode(l)
+    shortcode = make_shortcode(l)
     while shortcode in shortcodes:
-        shortcode = get_shortcode(l)
+        shortcode = make_shortcode(l)
     return shortcode
 
 

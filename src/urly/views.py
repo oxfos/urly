@@ -1,16 +1,15 @@
-
 import requests
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
 from .forms import ShortcodeForm
-from .utils import get_unique_shortcode, url_exists, is_not_unique, is_invalid
+from .utils import make_unique_shortcode, url_exists, is_not_unique, is_invalid
 from .models import Shortcode
 
 
 def homepage(request):
-    """View for / url, i.e. homepage.""" 
+    """View for '/', i.e. homepage.""" 
     form = ShortcodeForm()
     return render(request, 'urly/index.html', {'form':form})
 
@@ -23,21 +22,23 @@ def get_shortcode(request):
         entry = form.save(commit=False)
         if url_exists(cd['url']) != True:
             response = HttpResponse('Url not present.<br><a href="/">Try again</a>.')
-            response.reason_phrase = 'Url not present'
             response.status_code = 400
+            response.reason_phrase = 'Url not present'
             return response
         elif is_not_unique(cd['shortcode']):
-            response = HttpResponse('Shortcode already in use.<br><a href="/">Try again</a>.')
-            response.reason_phrase = 'Shortcode already in use'
+            response = HttpResponse('Shortcode already in use.<br>\
+                <a href="/">Try again</a>.')
             response.status_code = 409
+            response.reason_phrase = 'Shortcode already in use'
             return response
         elif is_invalid(cd['shortcode']):
-            response = HttpResponse('The provided shortcode is invalid.<br><a href="/">Try again</a>.')
-            response.reason_phrase = 'The provided shortcode is invalid'
+            response = HttpResponse('The provided shortcode is invalid.<br>\
+                    <a href="/">Try again</a>.')
             response.status_code = 412
+            response.reason_phrase = 'The provided shortcode is invalid'
             return response
         elif cd['shortcode'] == '':
-            entry.shortcode = get_unique_shortcode(6)
+            entry.shortcode = make_unique_shortcode(6)
         entry.redirectCount = 0
         entry.save()
         response = HttpResponse('{"shortcode":"%s"}' % (entry.shortcode))
@@ -51,7 +52,7 @@ def check_shortcode(request, shortcode_2):
     try:
         shortcode = Shortcode.objects.get(shortcode=shortcode_2)
     except:
-        response = HttpResponse('Shortcode not found<br><a href="/">Try again</a>.')
+        response = HttpResponse('Shortcode not found.<br><a href="/">Try again</a>.')
         response.status_code = 404
         response.reason_phrase = 'Shortcode not found'
         return response
@@ -70,11 +71,12 @@ def get_stats(request, shortcode):
     try:
         shortcode = Shortcode.objects.get(shortcode=shortcode)
     except:
-        response = HttpResponse('Shortcode not found<br><a href="/">Try again</a>.')
+        response = HttpResponse('Shortcode not found.<br><a href="/">Try again</a>.')
         response.status_code = 404
         response.reason_phrase = 'Shortcode not found'
         return response
     else:
-        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": %s}' % (shortcode.created, shortcode.lastRedirect, shortcode.redirectCount))
+        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": %s}'\
+             % (shortcode.created, shortcode.lastRedirect, shortcode.redirectCount))
         response.status_code = 200
         return response

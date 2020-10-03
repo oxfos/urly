@@ -6,7 +6,7 @@ from urly.models import Shortcode
 class Test_homepage_view(TestCase):
     """Test class for homepage view."""
 
-    def test_1_get_page(self):
+    def test_get_page(self):
         # Test GET works as expected.
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'urly/index.html') 
@@ -16,9 +16,10 @@ class Test_getshortcode_view(TestCase):
     """Test class for get_shortcode view."""
 
     def setUp(self):
-        Shortcode.objects.create(url='https://www.google.com', shortcode='catch_')
+        Shortcode.objects.create(url='https://www.google.com', shortcode='catch_',\
+            redirectCount=0)
 
-    def test_2_inexistent_url(self):
+    def test_inexistent_url(self):
         # Test valid but non-existent url.
         response = self.client.post('/shorten', {'url':'http://www.79as.com/'})
         self.assertEqual(response.status_code, 400)
@@ -49,17 +50,18 @@ class Test_check_shortcode_view(TestCase):
 
     def setUp(self):
         # Create a db Shortcode object.
-        self.entry = Shortcode.objects.create(url="https://www.google.com", shortcode="google")
+        self.entry = Shortcode.objects.create(url="https://www.google.com", shortcode="catch_",\
+            redirectCount=0)
 
-    def test_2_shortcode_exists(self):
+    def test_shortcode_exists(self):
         # Tests an existing shortcode...
-        response = self.client.get('/google')
+        response = self.client.get('/catch_')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.entry.url, fetch_redirect_response=False)
         self.assertEqual(response['Location'], self.entry.url)
 
-    def test_3_shortcode_does_not_exist(self):
+    def test_shortcode_does_not_exist(self):
         # Tests an inexistent shortcode...
-        response = self.client.get('/l3skja', follow=True)
+        response = self.client.get('/catch1')
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.reason_phrase, 'Shortcode not found')
