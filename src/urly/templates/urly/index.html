@@ -9,7 +9,7 @@
 </header>
 <main>
     <section>
-        <form action="{% url 'urly:shorten' %}" method="POST">
+        <form action="{% url 'urly:shorten' %}" method="POST" novalidate>
             {% csrf_token %}
             <p>
                 <label for="id_url">Url:</label>
