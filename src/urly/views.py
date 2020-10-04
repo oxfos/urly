@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.template import RequestContext
@@ -14,7 +15,7 @@ def homepage(request):
     return render(request, 'urly/index.html', {'form':form})
 
 
-def get_shortcode(request):
+def make_shortcode(request):
     """View to shorten url."""
     form = ShortcodeForm(data=request.POST)
     if form.is_valid():
@@ -62,7 +63,7 @@ def check_shortcode(request, shortcode):
         response = HttpResponseRedirect(shortcode.url)
         response.status_code = 302
         response['Location'] = shortcode.url
-        shortcode.lastRedirect = datetime.today()
+        shortcode.lastRedirect = timezone.now()
         shortcode.redirectCount = shortcode.redirectCount + 1
         shortcode.save()
         return response
