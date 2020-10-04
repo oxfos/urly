@@ -21,46 +21,43 @@ I use Python version 3.6.9 and pipenv (virtual environment package).
 
 The source code can be downloaded from GitHub at https://github.com/Oxfos/urly.git
 
-## Local set up
+### Set up
 
-Assumptions:
-- Python is installed on your machine.
+#### Assumptions:
 
-Steps:
+- Python >= 3.6 is installed on your machine.
+
+#### Steps:
+
 - Clone/copy the source code to a local machine.
-
-
-### Set up virtual environment (I use pipenv)
-
 - If pipenv is not installed:
 
-    $ pip install pipenv # system wide
+    $ pip install pip --upgrade     # to update and upgrade pip
+    $ pip install pipenv
 
-- Move to 'urly' project directory (where Pipfile, .git etc. are) and create virtual environment (it installs packages in Pipfile, if present):
+- Move inside the 'urly' directory (where Pipfile, .git etc. are) and create a virtual environment by typing-enter:
     
     $ pipenv install
+ 
+This will install packages listed in `Pipfile` (if present).
 
-
-If you don't use pipenv probably you need requirements.txt:
-
-- Install packages with requirements.txt:
+If you don't use pipenv as virtual environment tool, probably you need `requirements.txt`.<br>
+Use your standard tool for installing a virtual environment and install packages by typing-enter:
     
     $ pip install -r requirements.txt
 
 
 ## Instructions to start the application
 
-### Local
-
-- Launch the virtual environment by moving to the directory containing `Pipfile` and typing-enter:
+- Launch the virtual environment by moving inside the directory containing `Pipfile` and typing-enter:
     
     $ pipenv shell
 
-- Move to the directory containing the `manage.py` file and type-enter:
+- Move inside the directory containing the `manage.py` file and type-enter:
     
     $ python manage.py runserver
 
-- The application is accessible at IP 127.0.0.1, port 8000 ('localhost').
+- The application is accessible at IP address 127.0.0.1, port 8000 ('localhost').
 
 ## Instructions to run unit tests
 
@@ -69,16 +66,3 @@ If you don't use pipenv probably you need requirements.txt:
     
     $ python manage.py test
 
-
-
-# Additional instructions
-
-## Set up on production server
-
-- install gunicorn:
-
-    $ pipenv install gunicorn
-
-- install production server, e.g. Nginx:
-    
-    $ 
