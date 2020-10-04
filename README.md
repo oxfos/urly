@@ -1,7 +1,7 @@
 ## General
 
 I used the Python package Django to create the web service (I don't know Flask yet).<br>
-I use Python version 3.6.9 and pipenv (virtual environment package).
+I use Python version 3.6.9 and pipenv (package for virtual environments).
 
 ### Assumptions:
 
@@ -42,12 +42,12 @@ The source code can be downloaded from GitHub at https://github.com/Oxfos/urly.g
 This will install packages listed in `Pipfile` (if present).
 
 If you don't use pipenv as virtual environment tool, probably you need `requirements.txt`.<br>
-Use your standard tool for installing a virtual environment and install packages by typing-enter:
+Use your standard tool for installing and launching a virtual environment and install packages by typing-enter:
     
     $ pip install -r requirements.txt
 
 
-## Instructions to start the application
+### Instructions to start the application
 
 - Launch the virtual environment by moving inside the directory containing `Pipfile` and typing-enter:
     
@@ -59,10 +59,10 @@ Use your standard tool for installing a virtual environment and install packages
 
 - The application is accessible at IP address 127.0.0.1, port 8000 ('localhost').
 
-## Instructions to run unit tests
+### Instructions to run unit tests
 
 - Launch the virtual environment (see above).
-- Move to the directory containing the `manage.py` file and type-enter:
+- Move inside the directory containing the `manage.py` file and type-enter:
     
     $ python manage.py test
 
