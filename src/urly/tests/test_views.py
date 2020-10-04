@@ -13,7 +13,7 @@ class Test_homepage_view(TestCase):
 
 
 class Test_getshortcode_view(TestCase):
-    """Test class for get_shortcode view."""
+    """Test class for make_shortcode view."""
 
     def setUp(self):
         Shortcode.objects.create(url='https://www.google.com', shortcode='catch_',\
