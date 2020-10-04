@@ -33,14 +33,18 @@ Steps:
 ### Set up virtual environment (I use pipenv)
 
 - If pipenv is not installed:
+
     $ pip install pipenv # system wide
+
 - Move to 'urly' project directory (where Pipfile, .git etc. are) and create virtual environment (it installs packages in Pipfile, if present):
+    
     $ pipenv install
 
 
 If you don't use pipenv probably you need requirements.txt:
 
 - Install packages with requirements.txt:
+    
     $ pip install -r requirements.txt
 
 
@@ -49,15 +53,20 @@ If you don't use pipenv probably you need requirements.txt:
 ### Local
 
 - Launch the virtual environment by moving to the directory containing `Pipfile` and typing-enter:
+    
     $ pipenv shell
+
 - Move to the directory containing the `manage.py` file and type-enter:
+    
     $ python manage.py runserver
+
 - The application is accessible at IP 127.0.0.1, port 8000 ('localhost').
 
 ## Instructions to run unit tests
 
 - Launch the virtual environment (see above).
 - Move to the directory containing the `manage.py` file and type-enter:
+    
     $ python manage.py test
 
 
@@ -67,6 +76,9 @@ If you don't use pipenv probably you need requirements.txt:
 ## Set up on production server
 
 - install gunicorn:
+
     $ pipenv install gunicorn
+
 - install production server, e.g. Nginx:
+    
     $ 
