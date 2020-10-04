@@ -13,7 +13,7 @@ def make_shortcode(l):
 
 
 def make_unique_shortcode(l, set):
-    """Function to create unique get_shortcode."""
+    """Function to create unique make_shortcode."""
     shortcode = make_shortcode(l)
     while shortcode in set:
         shortcode = make_shortcode(l)
@@ -23,11 +23,11 @@ def make_unique_shortcode(l, set):
 def url_exists(url):
     """Function to test whether url exists."""
     try:
-        response = requests.get(url)
+        requests.get(url, timeout=(2,2))
     except:
         return False
     else:
-        return False if response.status_code != 200 else True
+        return True
 
 
 def is_valid(shortcode):
