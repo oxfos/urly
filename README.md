@@ -31,43 +31,39 @@ The source code can be downloaded from GitHub at https://github.com/Oxfos/urly.g
 
 - Clone/copy the source code to a local machine.
 - If pipenv is not installed:
-
-
-    $ pip install pip --upgrade     # to install/update pip
-    $ pip install pipenv
-
+```
+$ pip install pip --upgrade     # to install/update pip
+$ pip install pipenv
+```
 - Move inside the 'urly' directory (where Pipfile, .git etc. are) and create a virtual environment by typing-enter:
+```
+$ pipenv install
+```
 
-
-    $ pipenv install
- 
 This will install packages listed in `Pipfile` (if present).
 
 If you don't use pipenv as virtual environment tool, probably you need `requirements.txt`.<br>
 Use your standard tool for installing and launching a virtual environment and install packages by typing-enter:
-    
-    $ pip install -r requirements.txt
-
+```    
+$ pip install -r requirements.txt
+```
 
 ### Instructions to start the application
 
 - Launch the virtual environment by moving inside the directory containing `Pipfile` and typing-enter:
-
-
-    $ pipenv shell
-
+```
+$ pipenv shell
+```
 - Move inside the directory containing the `manage.py` file and type-enter:
-    
-
-    $ python manage.py runserver
-
+```
+$ python manage.py runserver
+```
 - The application is accessible at IP address 127.0.0.1, port 8000 ('localhost').
 
 ### Instructions to run unit tests
 
 - Launch the virtual environment (see above).
 - Move inside the directory containing the `manage.py` file and type-enter:
-
-
-    $ python manage.py test
-
+```
+$ python manage.py test
+```
