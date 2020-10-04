@@ -32,11 +32,13 @@ The source code can be downloaded from GitHub at https://github.com/Oxfos/urly.g
 - Clone/copy the source code to a local machine.
 - If pipenv is not installed:
 
-    $ pip install pip --upgrade     # to update and upgrade pip
+
+    $ pip install pip --upgrade     # to install/update pip
     $ pip install pipenv
 
 - Move inside the 'urly' directory (where Pipfile, .git etc. are) and create a virtual environment by typing-enter:
-    
+
+
     $ pipenv install
  
 This will install packages listed in `Pipfile` (if present).
@@ -50,11 +52,13 @@ Use your standard tool for installing and launching a virtual environment and in
 ### Instructions to start the application
 
 - Launch the virtual environment by moving inside the directory containing `Pipfile` and typing-enter:
-    
+
+
     $ pipenv shell
 
 - Move inside the directory containing the `manage.py` file and type-enter:
     
+
     $ python manage.py runserver
 
 - The application is accessible at IP address 127.0.0.1, port 8000 ('localhost').
@@ -63,6 +67,7 @@ Use your standard tool for installing and launching a virtual environment and in
 
 - Launch the virtual environment (see above).
 - Move inside the directory containing the `manage.py` file and type-enter:
-    
+
+
     $ python manage.py test
 
