@@ -80,6 +80,6 @@ def get_stats(request, shortcode):
         return response
     else:
         response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": %s}'\
-             % (shortcode.created, shortcode.lastRedirect, shortcode.redirectCount))
+             % (shortcode.created.isoformat(), shortcode.lastRedirect.isoformat(), shortcode.redirectCount))
         response.status_code = 200
         return response
