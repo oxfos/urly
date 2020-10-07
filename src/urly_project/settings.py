@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     # OWN APPS
 
     'urly.apps.UrlyConfig',
+
+    # THIRD PARTY APPS
+
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
