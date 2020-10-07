@@ -137,3 +137,10 @@ APPEND_SLASH = False
 
 import django_heroku
 django_heroku.settings(locals())
+
+
+# RESTFUL FRAMEWORK
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',]
+}
