@@ -3,7 +3,9 @@ from ..models import Shortcode
 from .serializers import ShortcodeStatsSerializer
 
 
-def shortcode_stats(request, shortcode):
+
+
+def api_shortcode_stats(request, shortcode):
     """Function view returning shortcode stats."""
     try:
         shortcode = Shortcode.objects.get(shortcode=shortcode)
