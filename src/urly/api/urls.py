@@ -5,5 +5,5 @@ from . import views
 app_name = 'urly'
 
 urlpatterns = [
-    path('<pk>/stats', views.ShortcodeDetailView.as_view(), name='api_stats'),
+    path('<shortcode>/stats', views.shortcode_stats, name='api_stats'),
 ]
