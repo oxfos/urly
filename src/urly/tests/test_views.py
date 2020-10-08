@@ -12,7 +12,7 @@ class Test_homepage_view(TestCase):
         self.assertTemplateUsed(response, 'urly/index.html') 
 
 
-class Test_getshortcode_view(TestCase):
+class Test_makeshortcode_view(TestCase):
     """Test class for make_shortcode view."""
 
     def setUp(self):
@@ -42,6 +42,7 @@ class Test_getshortcode_view(TestCase):
         response = self.client.post('/shorten', {'url': 'https://www.google.com'})
         self.assertEqual(response.status_code, 201)
         self.assertContains(response, 'shortcode', status_code=201)
+        self.assertNotIn('url', str(response.content))
 
 
 
