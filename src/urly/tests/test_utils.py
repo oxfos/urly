@@ -3,24 +3,6 @@ from django.test import TestCase
 from urly.utils import *
 
 
-class Test_make_shortcode(TestCase):
-    """Test class for make_shortcode function."""
-
-    @classmethod
-    def setUpTestData(self):
-        # Prepare shortcode set.
-        self.codes = []
-        for i in range(1000):
-            self.codes.append(make_shortcode(6))
-        self.jcodes = ''.join(self.codes)
-
-    def test_shortcode(self):
-        # All shortcodes have a length of 6.
-        self.assertTrue(len(c)==6 for c in self.codes)
-        # Shortcodes do not contain invalid characters
-        self.assertTrue(0 in [c in self.jcodes for c in ['%', '$', '#', '@']])
-
-
 class Test_make_unique_shortcode(TestCase):
     """Test class for make_unique_shortcode function."""
 

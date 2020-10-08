@@ -7,16 +7,11 @@ from .models import Shortcode
 alphanum = string.ascii_lowercase + string.digits + '_'
 
 
-def make_shortcode(l):
-    """Function to create random shortcode of length l."""
-    return ''.join(random.sample(alphanum,l))
-
-
 def make_unique_shortcode(l, set):
     """Function to create unique make_shortcode."""
-    shortcode = make_shortcode(l)
+    shortcode = ''.join(random.sample(alphanum,l))
     while shortcode in set:
-        shortcode = make_shortcode(l)
+        shortcode = ''.join(random.sample(alphanum,l))
     return shortcode
 
 
