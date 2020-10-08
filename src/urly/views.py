@@ -7,6 +7,7 @@ from django.template import RequestContext
 from .forms import ShortcodeForm
 from .utils import make_unique_shortcode, url_exists, is_valid
 from .models import Shortcode
+from .serializers import ShortcodeSerializer, ShortcodeStatsSerializer
 
 
 def homepage(request):
@@ -44,9 +45,8 @@ def make_shortcode(request):
             entry.shortcode = make_unique_shortcode(6, shortcodes)
         entry.redirectCount = 0
         entry.save()
-        response = HttpResponse('{"shortcode":"%s"}' % (entry.shortcode))
-        response.status_code = 201
-        return response
+        serializer = ShortcodeSerializer(entry, many=False)
+        return JsonResponse(serializer.data, status=201)
     return render(request, 'urly/index.html', {'form':form})
 
 
@@ -79,7 +79,5 @@ def get_stats(request, shortcode):
         response.reason_phrase = 'Shortcode not found'
         return response
     else:
-        response = HttpResponse('{"created": "%s", "lastRedirect": "%s", "redirectCount": %s}'\
-             % (timezone.localtime(shortcode.created).isoformat(), timezone.localtime(shortcode.lastRedirect).isoformat(), shortcode.redirectCount))
-        response.status_code = 200
-        return response
+        serializer = ShortcodeStatsSerializer(shortcode, many=False)
+        return JsonResponse(serializer.data, status=200)
