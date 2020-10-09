@@ -134,7 +134,7 @@ APPEND_SLASH = False
 
 
 # For Heroku
-
+## Comment out when testing local environment!!!
 import django_heroku
 django_heroku.settings(locals())
 
