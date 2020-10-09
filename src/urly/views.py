@@ -81,3 +81,4 @@ def get_stats(request, shortcode):
     else:
         serializer = ShortcodeStatsSerializer(shortcode, many=False)
         return JsonResponse(serializer.data, status=200)
+
