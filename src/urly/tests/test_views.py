@@ -1,4 +1,6 @@
+import json
 from django.test import TestCase
+from django.utils import timezone
 from urly.models import Shortcode
 
 
@@ -66,3 +68,24 @@ class Test_check_shortcode_view(TestCase):
         response = self.client.get('/catch1')
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.reason_phrase, 'Shortcode not found')
+
+
+class Test_get_stats_view(TestCase):
+    """Test class for get_stats view."""
+
+    def setUp(self):
+        # Create test db shortcode entry."""
+        Shortcode.objects.create(url='https//www.google.com', shortcode='catch_',\
+             redirectCount=3)
+    
+    def test_get_stats_of_non_existing_shortcode(self):
+        # Get stats of non existing shortcode.
+        response = self.client.get('/sli2s_/stats')
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.reason_phrase, 'Shortcode not found')
+
+    def test_get_stats_of_existing_shortcode(self):
+        # Stats of existing shortcode
+        response = self.client.get('/catch_/stats')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content.decode())['redirectCount'], 3)
