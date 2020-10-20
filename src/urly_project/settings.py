@@ -134,9 +134,9 @@ APPEND_SLASH = False
 
 
 # For Heroku: Comment out when testing local environment!!!
-if DEBUG == False:
-    import django_heroku
-    django_heroku.settings(locals())
+#if DEBUG == False:
+import django_heroku
+django_heroku.settings(locals())
 
 
 # RESTFUL FRAMEWORK
