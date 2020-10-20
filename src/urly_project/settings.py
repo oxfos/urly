@@ -133,10 +133,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 APPEND_SLASH = False
 
 
-# For Heroku
-## Comment out when testing local environment!!!
-import django_heroku
-django_heroku.settings(locals())
+# For Heroku: Comment out when testing local environment!!!
+if DEBUG == False:
+    import django_heroku
+    django_heroku.settings(locals())
 
 
 # RESTFUL FRAMEWORK
